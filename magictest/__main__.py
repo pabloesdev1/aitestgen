@@ -14,12 +14,14 @@ def cli():
     pass
 
 @cli.command()
-@click.option('--inputfile', help='Python file name with directory.')
-@click.option('--outputfile', help='Proto buffer file name with directory.')
-def generate(inputfile, outputfile):
+@click.option('--inputfile', help='Input file')
+@click.option('--outputfile', help='Output file')
+@click.option('--openai_model', help='Openai model')
+@click.option('--max_test_for_function', help='Maximun number of tests for function')
+def generate(inputfile, outputfile, openai_model, max_test_for_function):
+
     path, _ = os.path.splitext(inputfile)
-    file_name = path.split('/')[-1]
-    module = importlib.import_module(file_name, path)
+    module = importlib.import_module(path)
     functions = inspect.getmembers(module, inspect.isfunction)
     
     magictest = MagicTest(os.getenv("OPENAI_API_KEY"), outputfile)
@@ -30,10 +32,13 @@ def generate(inputfile, outputfile):
             func_data = FunctionData(name=func[0], doc=func[1].__doc__, args=func[1].arguments)
             tests += magictest.generate_test(func_data)
 
-    ruta_carpeta = os.path.join(os.getcwdb().decode('utf-8'), "tests")
-    if not os.path.exists(ruta_carpeta):
-        os.makedirs(ruta_carpeta)
-    with open(outputfile, "a") as file:
+    file_name = path.split('.')[-1]
+    path_tests_folder = os.path.join(os.getcwdb().decode('utf-8'), "tests")
+    path_tests_file = os.path.join(os.getcwdb().decode('utf-8'), "tests", f"test_{file_name}.py")
+    
+    if not os.path.exists(path_tests_folder):
+        os.makedirs(path_tests_folder)
+    with open(path_tests_file, "a") as file:
         file.write(tests)
 
 
