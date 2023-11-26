@@ -3,3 +3,4 @@ env/
 poetry.lock
 .env
 __pycache__/
+dist/
