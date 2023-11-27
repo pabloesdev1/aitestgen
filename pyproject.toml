@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "magicaitest"
-version = "0.0.1"
+version = "0.0.3"
 description = "Tool to generate simple unit test using openai api"
 authors = ["Pablo España <espana.pablo95@gmail.com>"]
 readme = "README.md"
