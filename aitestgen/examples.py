@@ -1,11 +1,11 @@
-from aitestgen.aitestgen import autotest
+from aitestgen.autotest import autotest
 
 @autotest()
-def sum(num1: int, num2: int) -> int:
-    """ Esta funcion recibe dos numeros enteros y debe retornar el resultado de la suma de ellos """
+def sum(num1: float, num2: float) -> float:
+    """This function is responsible for calculating the sum of two numbers"""
     return num1 + num2
 
 @autotest()
-def mul(num1: int, num2: int) -> int:
-    """ Esta funcion recibe dos numeros enteros y debe retornar el resultado de la multiplicacion de ellos """
+def mul(num1: float, num2: float) -> float:
+    """This function is responsible for calculating the multiplication of two numbers"""
     return num1 * num2
