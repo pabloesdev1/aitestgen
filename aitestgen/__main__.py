@@ -2,10 +2,10 @@ import os
 import click
 import inspect
 import importlib
-from magicaitest.magicaitest import MagicAITest
+from aitestgen.aitestgen import AITestGen
 from dotenv import load_dotenv
 
-from magicaitest.types.function_data import FunctionData
+from aitestgen.types.function_data import FunctionData
 
 load_dotenv()
 
@@ -31,13 +31,13 @@ def generate(inputfile, outputfile, openai_model, max_test_for_function):
     spec.loader.exec_module(module)    
     functions = inspect.getmembers(module, inspect.isfunction)
     
-    magicaitest = MagicAITest(os.getenv("OPENAI_API_KEY"), outputfile)
+    aitestgen = AITestGen(os.getenv("OPENAI_API_KEY"), outputfile)
     tests = ""
 
     for func in functions:
         if hasattr(func[1], "test_from_function"):
             func_data = FunctionData(name=func[0], doc=func[1].__doc__, args=func[1].arguments)
-            tests += magicaitest.generate_test(func_data)
+            tests += aitestgen.generate_test(func_data)
 
     path_tests_folder = os.path.join(current_path, "tests")    
     if not os.path.exists(path_tests_folder):

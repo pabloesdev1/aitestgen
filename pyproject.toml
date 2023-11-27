@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "magicaitest"
-version = "0.0.3"
+name = "aitestgen"
+version = "0.0.1"
 description = "Tool to generate simple unit test using openai api"
 authors = ["Pablo España <espana.pablo95@gmail.com>"]
 readme = "README.md"
-packages = [{include = "magicaitest"}]
+packages = [{include = "aitestgen"}]
 
 
 [tool.poetry.dependencies]
@@ -20,4 +20,4 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry.scripts]
-magicaitest = "magicaitest.__main__:cli"
+aitestgen = "aitestgen.__main__:cli"

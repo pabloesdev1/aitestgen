@@ -1,10 +1,10 @@
 import os
 import re
 import openai
-from magicaitest.types.function_data import FunctionData
+from aitestgen.types.function_data import FunctionData
 
 
-class MagicAITest:
+class AITestGen:
 
     def __init__(self, openai_api_key: str, outputfile: str) -> None:
         self.openai_api_key = openai_api_key

@@ -1,4 +1,4 @@
-from magicaitest.autotest import autotest
+from aitestgen.aitestgen import autotest
 
 @autotest()
 def sum(num1: int, num2: int) -> int:
