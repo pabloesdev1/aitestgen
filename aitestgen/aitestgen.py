@@ -6,9 +6,8 @@ from aitestgen.types.function_data import FunctionData
 
 class AITestGen:
 
-    def __init__(self, openai_api_key: str, outputfile: str) -> None:
+    def __init__(self, openai_api_key: str) -> None:
         self.openai_api_key = openai_api_key
-        self.outputfile = outputfile
         self.max_tests_for_function: int = 3
         self.template = """Genera {} tests en python usando pytest para la funcion: "{}" 
             que tiene la siguiente descripcion: {} y recibe: {}.
@@ -22,9 +21,8 @@ class AITestGen:
             # Function: (function_name) - testn:
             (python code)
             """
-        os.environ["OPENAI_API_KEY"] = openai_api_key
         openai.api_key = openai_api_key
-    
+
 
     def generate_test(self, function_data: FunctionData) -> str:
         response = openai.chat.completions.create(
@@ -40,4 +38,3 @@ class AITestGen:
         cleaned_response = re.sub(r'```python', '', result)
         cleaned_response = re.sub(r'```', '', cleaned_response)
         return cleaned_response
-
